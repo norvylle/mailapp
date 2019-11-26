@@ -18,7 +18,3 @@ app.listen(3001, (err) => {
   if (err) { console.log(err); }
   else { console.log('\nserver is running at http://localhost:3001'); }
 });
-
-module.exports = (app) => {
-  return app
-}
