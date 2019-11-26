@@ -25,7 +25,7 @@ exports.postList = (req,res,next) => {
         zip: req.body.zip,
         country: req.body.country
       },
-      permission_reminder: "You are receiving this email because you opted in via our website.",
+      permission_reminder: req.body.permission_reminder,
       campaign_defaults: {
         from_name: req.body.from_name,
         from_email: req.body.from_email,
@@ -51,7 +51,7 @@ exports.deleteList = (req,res,next) => {
   axios.delete(secrets["LISTS"]+`/${req.query.list_id}`,
     {
       auth:{
-        username: "john",
+        username: "ada",
         password: secrets["API_KEY"]
       }
     }
@@ -72,5 +72,47 @@ exports.getListMembers = (req,res,next) => {
     }
   ).then((response) => {
     res.send(response.data)
+  }).catch((error) => {
+    console.log(error.response)
+  })
+}
+
+exports.postListMember = (req,res,next) => {
+  axios.post(secrets["LISTS"]+`/${req.query.list_id}/members`,
+    {
+      email_address: req.body.email_address,
+      status: req.body.status
+    },
+    {
+      auth:{
+        username: "ada",
+        password: secrets["API_KEY"]
+      }
+    }
+  ).then((response) => {
+    res.send(response.data)
+  }).catch((error) => {
+    console.log(error.response)
+  })
+}
+
+exports.postCampaign = (req,res,next) => {
+  axios.post(secrets["CAMPAIGNS"],
+    {
+      type: req.body.type,
+      recipients: {
+        list_id: req.body.list_id
+      }
+    },
+    {
+      auth:{
+        username: "ada",
+        password: secrets["API_KEY"]
+      }
+    }
+  ).then((response) => {
+    res.send(response.data)
+  }).catch((error) => {
+    console.log(error.response)
   })
 }
