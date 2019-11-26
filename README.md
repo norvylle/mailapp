@@ -2,6 +2,7 @@
 ---
 ### Prerequisites
 1. Nodejs v10.15.3
+2. Secrets (for request)
 
 ### Steps to Run
 1. Clone this repository.

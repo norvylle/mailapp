@@ -1,4 +1,5 @@
 const axios = require('axios');
+const emails = require('./secrets.json')["EMAILS"]
 
 async function main(){
   
@@ -46,10 +47,10 @@ async function main(){
     })
 
   console.log("STEP 2: Add your email to the list")
-  console.log("\tGive me a moment as I add my email (norvuy@gmail.com)")
+  console.log("\tGive me a moment as I add my email ("+emails[0]+")")
   await axios.post(`http://localhost:3001/list-members?list_id=${list_id}`,
     {
-      email_address: "norvuy@gmail.com",
+      email_address: emails[0],
       status: "subscribed"
     }
   ).then((response)=>{
@@ -59,10 +60,10 @@ async function main(){
   })
 
   console.log("STEP 3: Add a few other valid emails")
-  console.log("\tLet's add another (norvylle@gmail.com)")
+  console.log("\tLet's add another ("+emails[1]+")")
   await axios.post(`http://localhost:3001/list-members?list_id=${list_id}`,
     {
-      email_address: "norvylle@gmail.com",
+      email_address: emails[1],
       status: "subscribed"
     }
   ).then((response)=>{
@@ -71,10 +72,10 @@ async function main(){
     console.log(error)
   })
 
-  console.log("\tAnd another (nsuy@up.edu.ph)")
+  console.log("\tAnd another ("+emails[2]+")")
   await axios.post(`http://localhost:3001/list-members?list_id=${list_id}`,
     {
-      email_address: "nsuy@up.edu.ph",
+      email_address: emails[2],
       status: "subscribed"
     }
   ).then((response)=>{
